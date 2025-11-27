@@ -1,11 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Sling as Hamburger } from 'hamburger-react'
 import StandardButton from './StandardButton';
+import NavItem from './NavItem';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar(){
+    const pages = ["dashboard", "users", "events", "sponsors", "miscellaneous", "settings"];
     const [isOpen, setOpen] = useState(false)
+    const pathname = usePathname();
+    useEffect(() => {
+        setOpen(false);
+    },[pathname])
     return(
         <div className='top-layer'>
             <header className='navbar'>
@@ -13,9 +21,16 @@ export default function Navbar(){
                 <p className='navbar-greeting'>Good morning, Name.</p>
             </header>
             {isOpen && (
-                <div className='navbar-open'>
+                <nav className='navbar-open'>
+                        <ul className='navbar-menu'>
+                            {
+                                pages.map(page =>
+                                        <NavItem key={page} page={page}/>
+                                )
+                            }
+                        </ul>
                     <StandardButton title="Sign Out." color="red"/>
-                </div>
+                </nav>
             )}
         </div>
     );

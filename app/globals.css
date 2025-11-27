@@ -1,17 +1,24 @@
+/* Generic Styles */
+
 * {
   /* outline: 1px solid red; */
   font-family: 'Switzer';
+  list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Layout Styles */
+a {
+  text-decoration: none;
+}
 
 body {
   background-color: #1A1A1A;
   display: flex;
   flex-direction: column;
 }
+
+/* Layout Styles */
 
 .navbar {
   align-items: center;
@@ -32,11 +39,22 @@ body {
   align-items: center;
   background-color: #272727;
   display: flex;
+  flex-direction: column;
   height: 100%;
   justify-content: center;
   width: 100%;
   position: fixed;
   z-index: 1;
+}
+
+.navbar-menu {
+  width: 400px;
+  margin: 0 0 64px;
+}
+
+.divider-standard {
+  width: 100%;
+  border-top: solid 1px #888888;
 }
 
 .navbar-greeting {
@@ -49,9 +67,20 @@ main {
   z-index: 0;
 }
 
+.nav-item {
+  cursor: pointer;
+}
+
+.nav-item-heading {
+  display: flex;
+  margin: 16px 0;
+  text-transform: capitalize;
+}
+
 .page-heading {
   display: flex;
   margin: 8px 32px 24px;
+  text-transform: capitalize;
 }
 
 .page-heading-icon {
@@ -74,6 +103,36 @@ main {
   margin: 16px 32px;
   padding: 16px;
 }
+
+.action-block {
+  align-items: center;
+  background-color: #272727;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  height: fit-content;
+  justify-content: center;
+  margin: 16px 32px;
+  padding: 16px;
+  width: calc(100% - 64px);
+}
+
+
+/* Table Styles */
+.table-columns {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-column {
+  margin: 0 0 12px;
+  width: 45%;
+}
+
 
 /* Button Styles */
 
