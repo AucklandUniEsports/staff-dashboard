@@ -9,18 +9,36 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/client": "^7.0.1",
+    "better-auth": "^1.4.3",
     "hamburger-react": "^2.5.2",
     "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.19.25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
-    "typescript": "^5"
+    "prisma": "^7.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b"
+  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b",
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AucklandUniEsports/staff-dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AucklandUniEsports/staff-dashboard/issues"
+  },
+  "homepage": "https://github.com/AucklandUniEsports/staff-dashboard#readme"
 }
