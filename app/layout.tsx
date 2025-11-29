@@ -5,6 +5,11 @@ import Navbar from "./components/Navbar";
 
 const switzer = Switzer({
   src:[
+        {
+      path: '../public/Switzer-Regular.woff2',
+      weight: '400',
+      style: 'normal'
+    },
     {
       path: '../public/Switzer-Medium.woff2',
       weight: '500',

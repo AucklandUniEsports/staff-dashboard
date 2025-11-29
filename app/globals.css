@@ -116,6 +116,7 @@ main {
   cursor: pointer;
   display: flex;
   font-size: 20px;
+  font-weight: 500;
   height: fit-content;
   justify-content: center;
   margin: 16px 32px;
@@ -152,6 +153,7 @@ main {
 .table-column-titles {
   color: white;
   display: flex;
+  font-weight: 500;
   justify-content: space-between;
   padding: 0 16px;
 }
