@@ -62,9 +62,8 @@ body {
   letter-spacing: -0.8px;
 }
 
-main {
-  margin: 96px 0 0 0;
-  z-index: 0;
+.navbar-ghost {
+  height: 96px;
 }
 
 .nav-item {
@@ -75,6 +74,10 @@ main {
   display: flex;
   margin: 16px 0;
   text-transform: capitalize;
+}
+
+main {
+  z-index: 0;
 }
 
 .page-heading {
@@ -122,15 +125,56 @@ main {
 
 
 /* Table Styles */
+
+.input-field {
+  background-color: #1A1A1A;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  margin: 0 0 16px;
+  width: calc(100% - 32px);
+  padding: 12px 16px;
+}
+
+.input-field:focus {
+  outline: none;
+}
+
+.input-field::placeholder {
+  color: #6B6B6B;
+}
+
 .table-columns {
+  margin: 0 0 16px;
+}
+
+.table-column-titles {
   color: white;
   display: flex;
   justify-content: space-between;
+  padding: 0 16px;
 }
 
 .table-column {
-  margin: 0 0 12px;
   width: 45%;
+}
+
+.divider-standard {
+  margin: 12px 0 0;
+}
+
+.table-row {
+  background-color: #1A1A1A;
+  border-radius: 5px;
+  padding: 24px 16px;
+}
+
+.table-row-titles {
+  align-items: center;
+  color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 
@@ -160,4 +204,14 @@ main {
 .button-red {
   background-color: #DF5F5F;
   color: white;
+}
+
+/* Landing Page Styles */
+
+.landing {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
 }

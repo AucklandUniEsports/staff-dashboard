@@ -1,19 +1,16 @@
-import Navbar from "./components/Navbar";
-import PageHeading from "./components/PageHeading";
+import InputField from "./components/InputField";
 import StandardButton from "./components/StandardButton";
-import TableColumns from "./components/TableColumns";
 
 export default function Home() {
   return (
-      <>
-        <PageHeading page="users" />
-        <button className="action-block">+ Create a User</button>
+      <div className="landing">
         <section className="content-block">
-          <StandardButton title="Delete User." color="red"/>
+          <InputField placeholderText="Username"/>
+          <InputField placeholderText="Password"/>
         </section>
-        <section className="content-block">
-          <TableColumns/>
-        </section>
-      </>
+        <StandardButton title="Sign In." color="lime"/>
+
+      </div>
+
   );
 }

@@ -1,7 +1,8 @@
 import Navbar from "../components/Navbar";
+import InputField from "../components/InputField";
 import PageHeading from "../components/PageHeading";
 import StandardButton from "../components/StandardButton";
-import TableColumns from "../components/TableColumns";
+import Table from "../components/Table";
 
 export default function Users() {
   return (
@@ -9,7 +10,8 @@ export default function Users() {
         <PageHeading page="users" />
         <button className="action-block">+ Create an User.</button>
         <section className="content-block">
-          <TableColumns/>
+          <InputField placeholderText="Search for a user..."/>
+          <Table/>
         </section>
       </>
   );

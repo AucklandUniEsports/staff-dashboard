@@ -1,12 +1,12 @@
 export default function TableColumns(){
     return(
-        <>
-            <div className="table-columns">
+        <div className="table-columns">
+            <div className="table-column-titles">
                 <p className="table-column-small">#</p>
                 <p className="table-column">Name</p>
                 <p className="table-column">Role</p>
             </div>
             <div className='divider-standard'></div>
-        </>
+        </div>
     )
 }
