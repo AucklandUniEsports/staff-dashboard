@@ -21,22 +21,57 @@ model User {
   role      Role     @default(USER)
 }
 
-// model Event {
-//   id        Int      @id @default(autoincrement())
-//   createdAt DateTime @default(now())
-//   name      String   @unique
-// }
+model Event {
+  id          Int                  @id @default(autoincrement())
+  createdAt   DateTime             @default(now())
+  name        String               @unique
+  categories  CategoriesOnEvents[]
+  date        DateTime
+  location    Location             @relation(fields: [locationId], references: [id])
+  locationId  Int
+  description String
+  link        String
+}
 
-// model Category {
-//   id        Int      @id @default(autoincrement())
-//   createdAt DateTime @default(now())
-//   name      String   @unique
-// }
+model Location {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name      String   @unique
+  color     String   @unique
+  events    Event[]
+}
 
-// model Sponsors {
-//   id        Int      @id @default(autoincrement())
-//   createdAt DateTime @default(now())
-// }
+model Category {
+  id        Int                  @id @default(autoincrement())
+  createdAt DateTime             @default(now())
+  name      String               @unique
+  events    CategoriesOnEvents[]
+}
+
+model CategoriesOnEvents {
+  event      Event    @relation(fields: [eventId], references: [id])
+  eventId    Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  assignedAt DateTime @default(now())
+
+  @@id([eventId, categoryId])
+}
+
+model Sponsors {
+  id            Int         @id @default(autoincrement())
+  createdAt     DateTime    @default(now())
+  name          String      @unique
+  sponsorTier   SponsorTier @relation(fields: [sponsorTierId], references: [id])
+  sponsorTierId Int
+}
+
+model SponsorTier {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  name      String     @unique
+  sponsors  Sponsors[]
+}
 
 enum Role {
   USER

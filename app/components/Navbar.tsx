@@ -32,7 +32,7 @@ export default function Navbar(){
                                         )
                                     }
                                 </ul>
-                            <StandardButton title="Sign Out." color="red"/>
+                            <StandardButton title="Sign Out." color="red" isLink={false}/>
                         </nav>
                     )}
                 </div>

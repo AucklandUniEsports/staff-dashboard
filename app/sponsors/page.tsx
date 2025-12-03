@@ -1,16 +1,14 @@
-import Navbar from "../components/Navbar";
-import PageHeading from "../components/PageHeading";
-import StandardButton from "../components/StandardButton";
-import TableColumns from "../components/TableColumns";
+import Link from "next/link";
+import Table from "../components/Table";
 
 export default function Sponsors() {
   return (
       <>
-        <PageHeading page="sponsors" />
-        <button className="action-block">+ Add a Sponsor.</button>
-        <section className="content-block">
-          <TableColumns/>
-        </section>
+      <Link className="action-block" href={"sponsors/add-sponsor"}>+ Add a Sponsor.</Link>
+      <section className="content-block">
+          <input className="input-field" type="text" placeholder="Search for a sponsor..."/>
+          <Table/>
+      </section>
       </>
   );
 }

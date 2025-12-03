@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
-import { headers } from "next/headers";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { nextCookies } from "better-auth/next-js";
+import { headers } from "next/headers";
 import { PrismaClient } from "@prisma/client/extension";
 
 const prisma = new PrismaClient();
@@ -11,6 +12,7 @@ export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql", // or "mysql", "postgresql", ...etc
     }),
+    plugins: [nextCookies()]
 
 });
 
@@ -20,14 +22,18 @@ await auth.api.getSession({
 
 await auth.api.signInEmail({
     body: {
-        email: "john@doe.com",
-        password: "password"
+        email: "john.doe@example.com", // required
+        password: "password1234", // required
+        rememberMe: true,
+        callbackURL: "https://example.com/callback",
     },
-    headers: await headers() // optional but would be useful to get the user IP, user agent, etc.
-})
+    // This endpoint requires session cookies.
+    headers: await headers(),
+});
 
 await auth.api.verifyEmail({
     query: {
         token: "my_token"
     }
 })
+

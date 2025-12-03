@@ -1,18 +1,14 @@
-import Navbar from "../components/Navbar";
-import InputField from "../components/InputField";
-import PageHeading from "../components/PageHeading";
-import StandardButton from "../components/StandardButton";
+import Link from "next/link";
 import Table from "../components/Table";
 
 export default function Users() {
   return (
       <>
-        <PageHeading page="users" />
-        <button className="action-block">+ Create an User.</button>
-        <section className="content-block">
-          <InputField placeholderText="Search for a user..."/>
+      <Link className="action-block" href={"users/create-user"}>+ Create an User.</Link>
+      <section className="content-block">
+          <input className="input-field" type="text" placeholder="Search for an user..."/>
           <Table/>
-        </section>
+      </section>
       </>
   );
 }

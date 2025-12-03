@@ -1,17 +1,15 @@
-import Navbar from "../components/Navbar";
-import PageHeading from "../components/PageHeading";
-import StandardButton from "../components/StandardButton";
-import TableColumns from "../components/TableColumns";
+import Link from "next/link";
+import Table from "../components/Table";
 
 export default function Events() {
   return (
       <>
-        <PageHeading page="events" />
-        <button className="action-block">+ Create an Event.</button>
-        <button className="action-block">+ Add Event Category.</button>
-        <section className="content-block">
-          <TableColumns/>
-        </section>
+      <Link className="action-block" href={"events/create-event"}>+ Create an Event.</Link>
+      <Link className="action-block" href={"events/add-event-category"}>+ Add Event Category.</Link>
+      <section className="content-block">
+          <input className="input-field" type="text" placeholder="Search for an event..."/>
+          <Table/>
+      </section>
       </>
   );
 }

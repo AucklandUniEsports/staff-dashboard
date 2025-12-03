@@ -121,7 +121,6 @@ main {
   justify-content: center;
   margin: 16px 32px;
   padding: 16px;
-  width: calc(100% - 64px);
 }
 
 

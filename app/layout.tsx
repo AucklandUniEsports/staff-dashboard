@@ -18,7 +18,6 @@ const switzer = Switzer({
   ]
 });
 
-
 export const metadata: Metadata = {
   title: "AUEC Staff Dashboard",
   description: "For The Love of The Game.",
