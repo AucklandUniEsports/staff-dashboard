@@ -6,6 +6,7 @@ export default async function AddEventCategory() {
       <>
         <section className="content-block">
           <BackNav/>
+          <label className="input-label" htmlFor="">Category Name</label>
           <input className="input-field" type="text" placeholder="Tekken 8"/>
           <StandardButton title="Add Category." type="submit" color="grey" isLink={false}/>
         </section>

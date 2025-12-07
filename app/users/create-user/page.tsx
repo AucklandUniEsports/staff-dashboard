@@ -1,14 +1,42 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import BackNav from "@/app/components/BackNav";
 import StandardButton from "@/app/components/StandardButton";
+import { signUp } from "@/lib/auth-client";
 
-export default async function CreateUser() {
+export default function CreateUser() {
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+
+    const res = await signUp.email({
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+    });
+
+    if (res.error) {
+      setError(res.error.message || "Something went wrong.");
+    } else {
+      router.push("/dashboard");
+    }
+  }
   return (
         <section className="content-block">
             <BackNav/>
-            <input className="input-field" type="text" placeholder="Name"/>
-            <input className="input-field" type="text" placeholder="Email"/>
-            <input className="input-field" type="text" placeholder="Password"/>
-            <StandardButton title="Create User." type="submit" color="grey" isLink={false}/>
+            <form onSubmit={handleSubmit}>
+              <input name="name" className="input-field" placeholder="Name" required type="text"/>
+              <input name="email" className="input-field" placeholder="Email" required type="email"/>
+              <input name="password" className="input-field" minLength={8} placeholder="Password" required type="password"/>
+              <StandardButton title="Create User." type="submit" color="grey" isLink={false}/>
+            </form>
+            {error && <p>{error}</p>}
         </section>
   );
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import BackArrowIcon from "./icons/BackArrowIcon";
 
 export default function BackNav(){
     const parentPath = usePathname().split('/')[1];
@@ -9,7 +10,7 @@ export default function BackNav(){
         <>
             <nav className="back-nav">
                 <Link className="back-nav-button" href={'/' + parentPath}>
-                    <img src="back-arrow.svg" alt="An arrow pointing to the left." />
+                    <BackArrowIcon/>
                 </Link>
                 <p>Back to <span className="capitalize">{parentPath}</span></p>
             </nav>

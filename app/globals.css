@@ -150,6 +150,12 @@ main {
 
 /* Table Styles */
 
+.input-label {
+  display: flex;
+  color: white;
+  margin: 0 0 8px;
+}
+
 .input-field {
   background-color: #1A1A1A;
   border: none;
