@@ -18,6 +18,29 @@ body {
   flex-direction: column;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
+.back-nav {
+  color: #747474;
+  display: flex;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.back-nav-button {
+  align-items: center;
+  background-color: #1A1A1A;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  height: 32px;
+  margin: 0 8px 0 0;
+  width: 32px;
+}
+
 /* Layout Styles */
 
 .navbar {
@@ -55,6 +78,7 @@ body {
 .divider-standard {
   width: 100%;
   border-top: solid 1px #888888;
+  margin: 12px 0;
 }
 
 .navbar-greeting {
@@ -159,10 +183,6 @@ main {
 
 .table-column {
   width: 45%;
-}
-
-.divider-standard {
-  margin: 12px 0 0;
 }
 
 .table-row {
