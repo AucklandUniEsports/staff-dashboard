@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import StandardButton from "./components/StandardButton";
-import { signIn } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 export default function Landing() {
     const router = useRouter();
@@ -14,7 +14,7 @@ export default function Landing() {
 
       const formData = new FormData(e.currentTarget);
 
-      const res = await signIn.email({
+      const res = await authClient.signIn.email({
         email: formData.get("email") as string,
         password: formData.get("password") as string,
       });

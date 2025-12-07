@@ -18,12 +18,15 @@ model User {
   createdAt     DateTime  @default(now())
   email         String    @unique
   name          String
-  role          Role      @default(USER)
+  role          String?   @default("user")
   emailVerified Boolean   @default(false)
   image         String?
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  banned        Boolean?
+  banReason     String?
+  banExpires    DateTime?
 
   @@map("user")
 }
@@ -80,22 +83,19 @@ model SponsorTier {
   sponsors  Sponsors[]
 }
 
-enum Role {
-  USER
-  ADMIN
-  SUPERADMIN
-}
-
 model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id            String   @id
+  expiresAt     DateTime
+  token         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  ipAddress     String?
+  userAgent     String?
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  impersonateBy String?
+
+  impersonatedBy String?
 
   @@unique([token])
   @@index([userId])
