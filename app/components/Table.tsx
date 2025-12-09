@@ -1,9 +1,15 @@
+'use client';
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 interface TableProps{
     columns: string[];
     rows: Record<string, any>[]; 
 }
 
 export default function Table({columns, rows} : TableProps){
+    const pathname = usePathname()
     return(
         <div>
             <div className="table-columns">
@@ -19,16 +25,18 @@ export default function Table({columns, rows} : TableProps){
             </div>
             <div>
                 {rows.map((row, index) =>
-                <li className="table-row" key={index}>
-                    <div className="table-row-titles">
-                            <p className="table-column-small">{index + 1}</p>
-                            {columns.map((column, colIndex) => (
-                                <p className="table-column" key={colIndex}>
-                                    {row[column]}
-                                </p>
-                            ))}
-                    </div>
-                </li>
+                <Link href={pathname + '/' + row.id} key={index}>
+                    <li className="table-row">
+                        <div className="table-row-titles">
+                                <p className="table-column-small">{index + 1}</p>
+                                {columns.map((column, colIndex) => (
+                                    <p className="table-column" key={colIndex}>
+                                        {row[column]}
+                                    </p>
+                                ))}
+                        </div>
+                    </li>
+                </Link>
                 )}
             </div>
         </div>
