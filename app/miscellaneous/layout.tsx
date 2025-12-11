@@ -3,7 +3,7 @@ import PageHeading from "../components/PageHeading";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
-export default async function EventsLayout({
+export default async function MiscellaneousLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -14,9 +14,8 @@ export default async function EventsLayout({
     redirect('/')
   }
   return (
-    
     <>
-        <PageHeading page="events" />
+        <PageHeading page="miscellaneous" />
         {children}
     </>
   );

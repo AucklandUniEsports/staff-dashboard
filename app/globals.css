@@ -41,6 +41,42 @@ body {
   width: 32px;
 }
 
+/* Landing Styles */
+.landing-header {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.landing-header-right {
+  margin: 0 0 0 4px;
+}
+
+.landing-version {
+  color: #6B6B6B;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 80%;
+  letter-spacing: -0.6px;
+}
+
+.landing-title {
+  color: #FFF;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 80%;
+  letter-spacing: -1.8px;
+  margin: 6px 0;
+}
+
+.landing-subtitle {
+  color: #6B6B6B;
+  font-weight: 500;
+  line-height: 80%;
+  letter-spacing: -1px;
+}
+
+
 /* Layout Styles */
 
 .navbar {
@@ -224,6 +260,7 @@ main {
   font-weight: 500;
   height: fit-content;
   padding: 12px 16px;
+  width: fit-content;
 }
 
 .button-lime {
@@ -249,4 +286,37 @@ main {
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+}
+
+.user-name {
+  color: #FFF;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 80%;
+  letter-spacing: -1.6px;
+  margin: 0 0 8px;
+}
+
+.user-email {
+  color: #6B6B6B;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 80%;
+  letter-spacing: -0.7px;
+  margin: 0 0 8px;
+}
+
+.user-info {
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.6px;
+  margin: 0 0 8px;
+}
+
+.user-buttons {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 8px;
 }

@@ -6,6 +6,7 @@ import { Sling as Hamburger } from 'hamburger-react'
 import StandardButton from './StandardButton';
 import NavItem from './NavItem';
 import { useRouter, usePathname } from 'next/navigation';
+import { signOutAction } from "../actions/auth";
 
 export default function Navbar(){
     const { data: session, isPending } = authClient.useSession();
@@ -36,7 +37,7 @@ export default function Navbar(){
                                         )
                                     }
                                 </ul>
-                            <StandardButton onClick={() => authClient.signOut()} title="Sign Out." color="red" isLink={false}/>
+                            <StandardButton onClick={signOutAction} title="Sign Out." color="red" isLink={false}/>
                         </nav>
                     )}
                 </div>
