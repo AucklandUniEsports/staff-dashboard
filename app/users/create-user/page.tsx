@@ -27,6 +27,7 @@ export default function CreateUser() {
       router.push("/dashboard");
     }
   }
+  
   return (
         <section className="content-block">
             <BackNav/>

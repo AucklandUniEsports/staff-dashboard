@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Table from "../components/Table";
-import prisma from '@/lib/prisma'
+import prisma from '@/lib/prisma';
+
 export default async function Users() {
   const rows = await prisma.user.findMany();
   const columns = ['name', 'role'];
