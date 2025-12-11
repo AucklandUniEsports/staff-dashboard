@@ -5,9 +5,12 @@ import { authClient } from "@/lib/auth-client";
 import StandardButton from "@/app/components/StandardButton";
 import BackNav from "@/app/components/BackNav";
 import { User } from "@/app/generated/prisma/client";
+import { usePathname } from "next/navigation";
 
 export default function UserPageClient({ user }: {user:User}) {
+
   const router = useRouter();
+  const pathname = usePathname();
 
   async function deleteUser() {
     await authClient.admin.removeUser({ userId: user.id });
@@ -27,9 +30,9 @@ export default function UserPageClient({ user }: {user:User}) {
       </div>
 
       <div className="user-buttons">
-        <StandardButton title="Edit User." color="grey" isLink={false}/>
-        <StandardButton title="Reset Password." color="grey" isLink={false}/>
-        <StandardButton onClick={deleteUser} title="Delete User." color="red" isLink={false}/>
+        <StandardButton title="Edit User." color="grey"/>
+        <StandardButton title="Reset Password" color="grey" link={pathname + '/reset-password'}/>
+        <StandardButton onClick={deleteUser} title="Delete User." color="red"/>
       </div>
     </section>
   );

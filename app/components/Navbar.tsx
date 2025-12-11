@@ -38,7 +38,7 @@ export default function Navbar(){
                                     )
                                 }
                             </ul>
-                        <StandardButton onClick={signOutAction} title="Sign Out." color="red" isLink={false}/>
+                        <StandardButton onClick={signOutAction} title="Sign Out." color="red"/>
                     </nav>
                 )}
             </div>

@@ -1,15 +1,39 @@
-interface StandardButtonProps{
-    title: string;
-    color: string;
-    isLink: true | false;
-    onClick?: () => void;
-    type?: "button" | "submit" | "reset";
-}
+import Link from "next/link";
 
-export default function StandardButton({title, color, onClick, type = "button"}: StandardButtonProps){
-    return(
-        <button className={"button-standard button-" + color} onClick={onClick} type={type}>
-            {title}
-        </button>
+type StandardButtonProps =
+  | {
+      title: string;
+      color: string;
+      link: string; // link present → render <Link>
+      onClick?: never;
+      type?: never;
+    }
+  | {
+      title: string;
+      color: string;
+      link?: undefined;
+      onClick?: () => void;
+      type?: "button" | "submit" | "reset";
+    };
+
+export default function StandardButton(props: StandardButtonProps) {
+  const className = `button-standard button-${props.color}`;
+
+  if (props.link) {
+    return (
+      <Link href={props.link} className={className}>
+        {props.title}
+      </Link>
     );
+  }
+
+  return (
+    <button
+      className={className}
+      onClick={props.onClick}
+      type={props.type ?? "button"}
+    >
+      {props.title}
+    </button>
+  );
 }
