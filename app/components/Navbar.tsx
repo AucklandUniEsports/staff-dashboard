@@ -8,41 +8,41 @@ import NavItem from './NavItem';
 import { useRouter, usePathname } from 'next/navigation';
 import { signOutAction } from "../actions/auth";
 
+const pages = ["dashboard", "users", "events", "sponsors", "miscellaneous", "settings"];
+const noNavRoutes = new Set(['/']);
+
 export default function Navbar(){
-    const { data: session, isPending } = authClient.useSession();
     const pathname = usePathname();
-    const noNavRoutes = ['/'];
-    const showNavbar = !noNavRoutes.includes(pathname);
-    const pages = ["dashboard", "users", "events", "sponsors", "miscellaneous", "settings"];
+    const showNavbar = !noNavRoutes.has(pathname);
+    if (!showNavbar) return null;
+    const { data: session, isPending } = authClient.useSession();
     const [isOpen, setOpen] = useState(false)
     useEffect(() => {
-        setOpen(false);
-    },[pathname])
+        document.body.style.overflow = isOpen ? "hidden" : "auto";
+    }, [isOpen]);
     return(
-        showNavbar && (
-            <>
-                <div className='top-layer'>
-                    <header className='navbar'>
-                        <Hamburger size={28} toggled={isOpen} toggle={setOpen} />
-                        {session && 
-                        <p className='navbar-greeting'>Good morning, {session.user.name.split(' ')[0]}.</p> 
-                        }
-                    </header>
-                    {isOpen && (
-                        <nav className='navbar-open'>
-                                <ul className='navbar-menu'>
-                                    {
-                                        pages.map(page =>
-                                            <NavItem key={page} onClick={() => setOpen(false)} page={page}/>
-                                        )
-                                    }
-                                </ul>
-                            <StandardButton onClick={signOutAction} title="Sign Out." color="red" isLink={false}/>
-                        </nav>
-                    )}
-                </div>
-                <div className='navbar-ghost'></div>
-            </>
-        )
+        <>
+            <div className='top-layer'>
+                <header className='navbar'>
+                    <Hamburger size={28} toggled={isOpen} toggle={setOpen} />
+                    {session && 
+                    <p className='navbar-greeting'>Good morning, {session.user.name.split(' ')[0]}.</p> 
+                    }
+                </header>
+                {isOpen && (
+                    <nav className='navbar-open'>
+                            <ul className='navbar-menu'>
+                                {
+                                    pages.map(page =>
+                                        <NavItem key={page} onClick={() => setOpen(false)} page={page}/>
+                                    )
+                                }
+                            </ul>
+                        <StandardButton onClick={signOutAction} title="Sign Out." color="red" isLink={false}/>
+                    </nav>
+                )}
+            </div>
+            <div className='navbar-ghost'></div>
+        </>
     );
 }
