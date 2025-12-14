@@ -30,7 +30,7 @@ export default function UserPageClient({ user }: {user:User}) {
       </div>
 
       <div className="user-buttons">
-        <StandardButton title="Edit User." color="grey"/>
+        <StandardButton title="Edit User." color="grey" link={pathname + '/edit-user'}/>
         <StandardButton title="Reset Password" color="grey" link={pathname + '/reset-password'}/>
         <StandardButton onClick={deleteUser} title="Delete User." color="red"/>
       </div>

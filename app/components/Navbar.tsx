@@ -14,12 +14,12 @@ const noNavRoutes = new Set(['/']);
 export default function Navbar(){
     const pathname = usePathname();
     const showNavbar = !noNavRoutes.has(pathname);
-    if (!showNavbar) return null;
     const { data: session, isPending } = authClient.useSession();
     const [isOpen, setOpen] = useState(false)
     useEffect(() => {
         document.body.style.overflow = isOpen ? "hidden" : "auto";
     }, [isOpen]);
+    if (!showNavbar) return null;
     return(
         <>
             <div className='top-layer'>
