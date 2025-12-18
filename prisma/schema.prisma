@@ -68,7 +68,7 @@ model CategoriesOnEvents {
   @@id([eventId, categoryId])
 }
 
-model Sponsors {
+model Sponsor {
   id            Int         @id @default(autoincrement())
   createdAt     DateTime    @default(now())
   name          String      @unique
@@ -77,10 +77,10 @@ model Sponsors {
 }
 
 model SponsorTier {
-  id        Int        @id @default(autoincrement())
-  createdAt DateTime   @default(now())
-  name      String     @unique
-  sponsors  Sponsors[]
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  name      String    @unique
+  sponsor   Sponsor[]
 }
 
 model Session {

@@ -32,9 +32,12 @@ export default function CreateUser() {
         <section className="content-block">
             <BackNav/>
             <form onSubmit={handleSubmit}>
-              <input name="name" className="input-field" placeholder="Name" required type="text"/>
-              <input name="email" className="input-field" placeholder="Email" required type="email"/>
-              <input name="password" className="input-field" minLength={8} placeholder="Password" required type="password"/>
+              <label className="input-label" htmlFor="">Name</label>
+              <input name="name" className="input-field" placeholder="First Last" required type="text"/>
+              <label className="input-label" htmlFor="">Email</label>
+              <input name="email" className="input-field" placeholder="feinfeinfein@gmail.com" required type="email"/>
+              <label className="input-label" htmlFor="">Password</label>
+              <input name="password" className="input-field" minLength={8} placeholder="Password123" required type="password"/>
               <StandardButton title="Create User." type="submit" color="grey"/>
             </form>
             {error && <p>{error}</p>}

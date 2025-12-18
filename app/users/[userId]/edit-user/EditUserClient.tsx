@@ -34,8 +34,10 @@ export default function EditUserClient({userId}:{userId:string}){
         <section className="content-block">
             <BackNav/>
             <form onSubmit={handleSubmit}>
-                <input name="name" className="input-field" placeholder="Name" required type="text"/>
-                <input name="email" className="input-field" placeholder="Email" required type="email"/>
+              <label className="input-label" htmlFor="">Name</label>
+                <input name="name" className="input-field" placeholder="First Last" required type="text"/>
+                <label className="input-label" htmlFor="">Email</label>
+                <input name="email" className="input-field" placeholder="feinfeinfein@gmail.com" required type="email"/>
                 <StandardButton title="Update Details." type="submit" color="grey"/>
             </form>
             {error && <p>{error}</p>}

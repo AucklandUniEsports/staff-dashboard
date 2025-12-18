@@ -192,6 +192,28 @@ main {
   margin: 0 0 8px;
 }
 
+.upload-image {
+  align-items: center;
+  background-color: #1A1A1A;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+  height: fit-content;
+  justify-content: center;
+  margin: 16px 0;
+  padding: 16px;
+}
+
+.uploaded-image-preview {
+  width: 100%;
+}
+
+
+
 .input-field {
   background-color: #1A1A1A;
   border: none;

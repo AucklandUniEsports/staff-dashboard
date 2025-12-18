@@ -31,7 +31,8 @@ export default function ResetPasswordClient({ userId }: { userId: string }) {
         <section className="content-block">
             <BackNav/>
             <form onSubmit={handleSubmit}>
-              <input name="password" className="input-field" minLength={8} placeholder="Password" required type="password"/>
+              <label className="input-label" htmlFor="">New Password</label>
+              <input name="password" className="input-field" minLength={8} placeholder="Password123" required type="password"/>
               <StandardButton title="Reset Password." type="submit" color="grey"/>
             </form>
             {error && <p>{error}</p>}
