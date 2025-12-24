@@ -32,15 +32,16 @@ model User {
 }
 
 model Event {
-  id          Int                  @id @default(autoincrement())
-  createdAt   DateTime             @default(now())
-  name        String               @unique
-  categories  CategoriesOnEvents[]
-  date        DateTime
-  location    Location             @relation(fields: [locationId], references: [id])
-  locationId  Int
-  description String
-  link        String
+  id            Int                  @id @default(autoincrement())
+  createdAt     DateTime             @default(now())
+  name          String               @unique
+  categories    CategoriesOnEvents[]
+  date          DateTime
+  location      Location             @relation(fields: [locationId], references: [id])
+  locationId    Int
+  description   String
+  link          String
+  thumbnailLink String
 }
 
 model Location {
