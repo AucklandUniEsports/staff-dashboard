@@ -8,10 +8,11 @@ import StandardButton from "@/app/components/StandardButton";
 import CategoryTag from '@/app/components/CategoryTag';
 
 interface CreateEventClientProps{
-    categories: Record<string, any>[];
+  locations: Record<string, any>[];
+  categories: Record<string, any>[];
 }
 
-export default function CreateEventClient({categories} : CreateEventClientProps) {
+export default function CreateEventClient({locations, categories} : CreateEventClientProps) {
   const router = useRouter();
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -45,12 +46,22 @@ export default function CreateEventClient({categories} : CreateEventClientProps)
             type="datetime-local"
             id="meeting-time"
             name="date-time"/>
+            <label className="input-label">Location</label>
+            <ul className='category-wrapper'>
+              {
+                  locations.map((location, index) =>
+                      <CategoryTag name={location.name} key={index}/>
+                  )
+              }
+            </ul>
             <label className="input-label">Categories</label>
-            {
-                categories.map((categories, index) => 
-                    <CategoryTag name={categories.name} key={index}/>
-                )
-            }
+            <ul className='category-wrapper'>
+              {
+                  categories.map((categories, index) =>
+                      <CategoryTag name={categories.name} key={index}/>
+                  )
+              }
+            </ul>
             <label className="input-label">Event Description</label>
             <input className="input-field" type="text" placeholder="Really dope Tekken 8/Brawllhalla Tournament."/>
             <label className="input-label">Signup Page</label>

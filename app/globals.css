@@ -27,10 +27,16 @@ body {
   color: #AAAAAA;
   cursor: pointer;
   display: flex;
-  margin: 0 0 12px;
   outline: 1px solid #AAAAAA;
   padding: 6px 8px;
   width: fit-content;
+}
+
+.category-wrapper {
+  display: flex;
+  margin: 0 0 12px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .back-nav {
@@ -355,4 +361,8 @@ main {
   flex-direction: column;
   width: fit-content;
   gap: 8px;
+}
+
+.wip {
+  color: white;
 }

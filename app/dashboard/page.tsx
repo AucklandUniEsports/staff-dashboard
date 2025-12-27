@@ -1,7 +1,7 @@
+import WorkInProgress from "../components/WorkInProgress";
+
 export default function Dashboard() {
   return (
-      <>
-        {/* <PageHeading page="dashboard" /> */}
-      </>
+    <WorkInProgress/>
   );
 }
