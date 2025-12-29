@@ -46,7 +46,7 @@ export default function Landing() {
             <label className="input-label" htmlFor="">Password</label>
             <input className="input-field" name="password" placeholder="Password123" required type="password"/>
           </section>
-          <StandardButton title="Sign In." color="lime" type="submit" isLink={false}/>
+          <StandardButton title="Sign In." color="lime" type="submit"/>
           {error && <p>{error}</p>}
       </form>
 
