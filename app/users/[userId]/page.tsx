@@ -11,7 +11,7 @@ export default async function UserPage({params}:{params: Promise <{userId: strin
   })
   if (!data){
     return (
-      <div>not found!</div>
+      <div>User not found!</div>
     )
   }
   return <UserPageClient user={data} />;
