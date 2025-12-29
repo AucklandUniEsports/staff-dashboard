@@ -32,6 +32,11 @@ body {
   width: fit-content;
 }
 
+.selectable-input:checked+.category-tag {
+  color: white;
+  outline: 1px solid white;
+}
+
 .category-wrapper {
   display: flex;
   margin: 0 0 12px;
@@ -225,7 +230,7 @@ main {
   padding: 16px;
 }
 
-.uploaded-image-preview {
+.thumbnail {
   width: 100%;
 }
 

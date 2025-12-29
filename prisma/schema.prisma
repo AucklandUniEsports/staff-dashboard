@@ -41,7 +41,7 @@ model Event {
   locationId    Int
   description   String
   link          String
-  thumbnailLink String
+  thumbnailPath String
 }
 
 model Location {

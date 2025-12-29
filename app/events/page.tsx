@@ -2,7 +2,7 @@ import Link from "next/link";
 import Table from "../components/Table";
 import prisma from '@/lib/prisma';
 
-const columns = ['name', 'date'];
+const columns = ['name'];
 export default async function Events() {
   const rows = await prisma.event.findMany();
   return (

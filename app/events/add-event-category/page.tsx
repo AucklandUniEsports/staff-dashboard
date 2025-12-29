@@ -3,7 +3,7 @@
 import BackNav from "@/app/components/BackNav";
 import StandardButton from "@/app/components/StandardButton";
 import { useRouter } from "next/navigation";
-import { createCategory } from "@/app/actions/createCategory";
+import createCategory from "@/app/actions/createCategory";
 
 export default function AddEventCategory() {
   const router = useRouter();
