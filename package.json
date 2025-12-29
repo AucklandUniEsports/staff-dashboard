@@ -16,7 +16,7 @@
     "better-auth": "^1.4.3",
     "dotenv": "^17.2.3",
     "hamburger-react": "^2.5.2",
-    "next": "16.0.3",
+    "next": "16.0.10",
     "pg": "^8.16.3",
     "react": "19.2.0",
     "react-dom": "19.2.0"
