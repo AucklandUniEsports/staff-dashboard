@@ -16,15 +16,32 @@ export default function EventPageClient({ event }: {event:Event}) {
   if (!event) return <p>Event not found!</p>;
 
   return (
-    <section className="content-block">
-      <BackNav/>
-      <img className="thumbnail" src={"https://hizvklozfaxggijszcab.supabase.co/storage/v1/object/public/event_thumbnails/" + event.thumbnailPath} alt="" />
-      <p className="user-name">{event.name}</p>
-      <div className="user-info">
-        <p>Description: {event.description}</p>
-        <p>Link: {event.link}</p>
-      </div>
-      <StandardButton title="Edit" type="button" color="lime" onClick={() => setIsEditing(true)} />
-    </section>
+      <section className="content-block">
+          <BackNav />
+          <img
+              className="thumbnail"
+              src={
+                  "https://hizvklozfaxggijszcab.supabase.co/storage/v1/object/public/event_thumbnails/" +
+                  event.thumbnailPath
+              }
+              alt=""
+          />
+          <p className="user-name">{event.name}</p>
+          <div className="user-info">
+              <p>Description: {event.description}</p>
+              <p>Link: {event.link}</p>
+          </div>
+          <StandardButton
+              title="Edit"
+              type="button"
+              color="lime"
+              onClick={() => setIsEditing(true)}
+          />
+          {isEditing && (
+              <div className="popup">
+                  <div className="content-block"></div>
+              </div>
+          )}
+      </section>
   );
 }
