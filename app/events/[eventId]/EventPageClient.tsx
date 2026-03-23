@@ -39,7 +39,14 @@ export default function EventPageClient({ event }: {event:Event}) {
           />
           {isEditing && (
               <div className="popup">
-                  <div className="content-block"></div>
+                  <div className="content-block">
+                    <StandardButton
+                        title="X"
+                        type="button"
+                        color="grey"
+                        onClick={() => setIsEditing(false)}
+                    />
+                  </div>
               </div>
           )}
       </section>
