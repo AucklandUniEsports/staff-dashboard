@@ -1,5 +1,5 @@
 'use client';
-
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import StandardButton from "@/app/components/StandardButton";
@@ -11,7 +11,7 @@ export default function EventPageClient({ event }: {event:Event}) {
 
   const router = useRouter();
   const pathname = usePathname();
-
+  const [isEditing, setIsEditing] = useState(false);
 
   if (!event) return <p>Event not found!</p>;
 
@@ -24,6 +24,7 @@ export default function EventPageClient({ event }: {event:Event}) {
         <p>Description: {event.description}</p>
         <p>Link: {event.link}</p>
       </div>
+      <StandardButton title="Edit" type="button" color="lime" onClick={() => setIsEditing(true)} />
     </section>
   );
 }
