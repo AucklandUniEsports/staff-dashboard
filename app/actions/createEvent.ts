@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 const apiKey = process.env.SUPABASE_SECRET_API_KEY ?? '';
 const supabase = createClient('https://hizvklozfaxggijszcab.supabase.co', apiKey)
 
-async function uploadThumbnail(thumbnail: File) {
+export async function uploadThumbnail(thumbnail: File) {
     const ext = thumbnail.name.split(".").pop();
 
     const filePath = `${crypto.randomUUID()}.${ext}`;
