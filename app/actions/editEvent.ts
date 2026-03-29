@@ -24,16 +24,17 @@ export default async function editEvent(eventId: number, formData: FormData) {
     
     await prisma.event.update({
         where: {
-            id: eventId
+            id: eventId,
         },
         data: {
-            name: name,
-            date: date,
-            locationId: locationId,
-            description: description,
-            link: link,
+            name: name || undefined,
+            date: date || undefined,
+            locationId: locationId || undefined,
+            description: description || undefined,
+            link: link || undefined,
             thumbnailPath: thumbnailPath || undefined,
             categories: {
+                deleteMany: {},
                 create: categories.map((categoryId) => ({
                     categoryId,
                 })),
