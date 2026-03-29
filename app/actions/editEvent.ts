@@ -6,10 +6,7 @@ import { uploadThumbnail } from "./createEvent";
 export default async function editEvent(eventId: number, formData: FormData) {
     const name = formData.get("name") as string;
     const dateRaw = formData.get("date-time");
-    if (typeof dateRaw !== "string") {
-        throw new Error("Invalid date");
-    }
-    const date = new Date(dateRaw);
+    const date = dateRaw ? new Date(dateRaw as string) : undefined;
     const locationId = Number(formData.get("location"));
     const categories = formData.getAll("categories").map((id) => Number(id));
     const description = formData.get("description") as string;
