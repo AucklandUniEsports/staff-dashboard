@@ -386,3 +386,12 @@ main {
   align-items: center;
   z-index: 3;
 }
+
+.popup-content {
+  background-color: #272727;
+  border-radius: 5px;
+  padding: 24px;
+  width: 80%;
+  height: 70%;
+  overflow-y: auto;
+}
