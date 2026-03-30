@@ -37,6 +37,7 @@ export class EventService {
     }
 
     static async deleteEvent(id: number) {
+        //TODO: Delete relations alongside event
         const event = await prisma.event.delete({
             where: { id },
         });
