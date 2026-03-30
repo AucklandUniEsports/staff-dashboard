@@ -5,7 +5,7 @@ import BackNav from '@/app/components/BackNav';
 import StandardButton from "@/app/components/StandardButton";
 import CategoryTag from '@/app/components/CategoryTag';
 import createEvent from '@/app/actions/createEvent';
-import { Event, Location, Category, Prisma } from "@/app/generated/prisma/client";
+import { Location, Category, Prisma } from "@/app/generated/prisma/client";
 import editEvent from '@/app/actions/editEvent';
 
 type EventWithCategories = Prisma.EventGetPayload<{

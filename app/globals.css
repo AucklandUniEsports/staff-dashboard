@@ -372,7 +372,7 @@ main {
   color: white;
 }
 
-/* Popup Style */
+/* Popup Form Style */
 
 .popup {
   position: fixed;
@@ -390,8 +390,30 @@ main {
 .popup-content {
   background-color: #272727;
   border-radius: 5px;
-  padding: 24px;
   width: 80%;
-  height: 70%;
+  height: 80%;
+  margin-top: 3%;
   overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .popup-content {
+    margin-top: 6%;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-content {
+    margin-top: 4%;
+  }
+}
+
+.popup-header {
+  background-color: #272727;
+  display: flex;
+  padding: 12px 45px;
+  justify-content: space-between;
+  align-items: center;
+    position: sticky;
+  top: 0;
 }

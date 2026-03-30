@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import StandardButton from "@/app/components/StandardButton";
 import BackNav from "@/app/components/BackNav";
-import { Event, Location, Category, Prisma } from "@/app/generated/prisma/client";
+import { Location, Category, Prisma } from "@/app/generated/prisma/client";
 import { usePathname } from "next/navigation";
 import CreateEventClient from "../create-event/CreateEventClient";
 
@@ -51,12 +51,18 @@ export default function EventPageClient({ event, locations, categories }: EventP
             {isEditing && (
                 <div className="popup">
                     <div className="popup-content">
-                        <StandardButton
+                        <div className="popup-header">             
+                                   
+                        <div className="page-heading-title">Edit Event</div>
+                        
+                            <StandardButton
                             title="X"
                             type="button"
-                            color="grey"
+                            color="lime"
                             onClick={() => setIsEditing(false)}
                         />
+                        </div>
+
                         <CreateEventClient locations={locations} categories={categories} event={event} />
                     </div>
                 </div>
