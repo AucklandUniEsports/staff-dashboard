@@ -4,12 +4,17 @@ import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import StandardButton from "@/app/components/StandardButton";
 import BackNav from "@/app/components/BackNav";
-import { Event, Location, Category } from "@/app/generated/prisma/client";
+import { Event, Location, Category, Prisma } from "@/app/generated/prisma/client";
 import { usePathname } from "next/navigation";
 import CreateEventClient from "../create-event/CreateEventClient";
 
+
+type EventWithCategories = Prisma.EventGetPayload<{
+    include: { categories: true }
+}>;
+
 interface EventPageClientProps {
-  event: Event;
+  event: EventWithCategories;
   locations: Location[];
   categories: Category[];
 }
@@ -52,7 +57,7 @@ export default function EventPageClient({ event, locations, categories }: EventP
                             color="grey"
                             onClick={() => setIsEditing(false)}
                         />
-                        <CreateEventClient locations={locations} categories={categories} />
+                        <CreateEventClient locations={locations} categories={categories} event={event} />
                     </div>
                 </div>
             )}
