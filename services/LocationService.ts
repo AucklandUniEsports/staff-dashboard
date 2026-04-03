@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { LocationCreateInput, LocationUpdateInput } from "@/app/generated/prisma/models";
 
 export class LocationService {
-    static async addLocation(data: LocationCreateInput) {
+    static async createLocation(data: LocationCreateInput) {
         return prisma.location.create({ data });
     }
 
