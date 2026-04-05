@@ -60,9 +60,9 @@ model Category {
 }
 
 model CategoriesOnEvents {
-  event      Event    @relation(fields: [eventId], references: [id])
+  event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId    Int
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId Int
   assignedAt DateTime @default(now())
 
