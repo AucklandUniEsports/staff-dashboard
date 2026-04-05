@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { CategoryService } from "@/services/CategoryService";
+import { checkAuth } from "@/utils/checkAuth";
 
-export async function GET(
-    { params }: { params: Promise<{ id: number }> }
-) {
+export const GET = checkAuth(async ({ params }: { params: Promise<{ id: number }> }) => {
     const { id } = await params;
-
     try {
         const category = await CategoryService.getCategoryById(id);
 
@@ -24,32 +22,9 @@ export async function GET(
             { status: 500 }
         );
     }
-}
+});
 
-export async function DELETE(
-    { params }: { params: Promise<{ id: number }> }
-) {
-    const { id } = await params;
-
-    try {
-        await CategoryService.deleteCategory(id);
-        return NextResponse.json(
-            { message: "Category deleted successfully" },
-            { status: 200 }
-        );
-    } catch (err) {
-        console.error(err);
-        return NextResponse.json(
-            { message: "Internal server error" },
-            { status: 500 }
-        );
-    }
-}
-
-export async function PUT(
-    req: NextRequest,
-    { params }: { params: Promise<{ id: number }> }
-) {
+export const PUT = checkAuth(async (req: NextRequest, { params }: { params: Promise<{ id: number }> }) => {
     const { id } = await params;
     const data = await req.json();
 
@@ -66,4 +41,21 @@ export async function PUT(
             { status: 500 }
         );
     }
-}
+});
+
+export const DELETE = checkAuth(async ({ params }: { params: Promise<{ id: number }> }) => {
+    const { id } = await params;
+    try {
+        await CategoryService.deleteCategory(id);
+        return NextResponse.json(
+            { message: "Category deleted successfully" },
+            { status: 200 }
+        );
+    } catch (err) {
+        console.error(err);
+        return NextResponse.json(
+            { message: "Internal server error" },
+            { status: 500 }
+        );
+    }
+});

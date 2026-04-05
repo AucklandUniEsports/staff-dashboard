@@ -1,25 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { LocationService } from "@/services/LocationService";
+import { checkAuth } from "@/utils/checkAuth";
 
-export async function GET() {
-    try {
-        const locations = await LocationService.getAllLocations();
-        return NextResponse.json(
-            { message: "Successfully fetched all locations", data: location },
-            {
-                status: 200,
-            }
-        );
-    } catch (error) {
-        console.error("Error fetching all locations:", error);
-        return NextResponse.json(
-            { error: "Failed to fetch all locations" },
-            { status: 500 }
-        );
-    }
-}
-
-export async function POST(req: NextRequest) {
+export const POST = checkAuth(async (req: NextRequest) => {
     try {
         const data = await req.json();
         const newUser = await LocationService.createLocation(data);
@@ -36,5 +19,22 @@ export async function POST(req: NextRequest) {
             { status: 500 }
         );
     }
-}
+});
 
+export const GET = checkAuth(async () => {
+    try {
+        const locations = await LocationService.getAllLocations();
+        return NextResponse.json(
+            { message: "Successfully fetched all locations", data: locations },
+            {
+                status: 200,
+            }
+        );
+    } catch (error) {
+        console.error("Error fetching all locations:", error);
+        return NextResponse.json(
+            { error: "Failed to fetch all locations" },
+            { status: 500 }
+        );
+    }
+});

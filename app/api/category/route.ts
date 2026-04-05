@@ -1,25 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { CategoryService } from "@/services/CategoryService";
+import { checkAuth } from "@/utils/checkAuth";
 
-export async function GET() {
-    try {
-        const categories = await CategoryService.getAllCategories();
-        return NextResponse.json(
-            { message: "Successfully fetched all Categories", data: categories },
-            {
-                status: 200,
-            }
-        );
-    } catch (error) {
-        console.error("Error fetching all categories:", error);
-        return NextResponse.json(
-            { error: "Failed to fetch all categories" },
-            { status: 500 }
-        );
-    }
-}
-
-export async function POST(req: NextRequest) {
+export const POST = checkAuth(async (req: NextRequest) => {
     try {
         const data = await req.json();
         const newCategory = await CategoryService.addCategory(data);
@@ -36,9 +19,27 @@ export async function POST(req: NextRequest) {
             { status: 500 }
         );
     }
-}
+});
 
-export async function DELETE() {
+export const GET = checkAuth(async () => {
+    try {
+        const categories = await CategoryService.getAllCategories();
+        return NextResponse.json(
+            { message: "Successfully fetched all Categories", data: categories },
+            {
+                status: 200,
+            }
+        );
+    } catch (error) {
+        console.error("Error fetching all categories:", error);
+        return NextResponse.json(
+            { error: "Failed to fetch all categories" },
+            { status: 500 }
+        );
+    }
+});
+
+export const DELETE = checkAuth(async () => {
     try {
         const categories = await CategoryService.deleteAllCategories();
         return NextResponse.json(`Deleted ${categories.count} categories.`, {
@@ -51,4 +52,4 @@ export async function DELETE() {
             { status: 500 }
         );
     }
-}
+});

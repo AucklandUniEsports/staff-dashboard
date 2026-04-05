@@ -1,25 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { UserService } from "../../../services/UserService";
+import { checkAuth } from "@/utils/checkAuth";
 
-export async function GET() {
-    try {
-        const users = await UserService.getAllUsers();
-        return NextResponse.json(
-            { message: "Successfully fetched all users", data: users },
-            {
-                status: 200,
-            }
-        );
-    } catch (error) {
-        console.error("Error fetching all users:", error);
-        return NextResponse.json(
-            { error: "Failed to fetch all users" },
-            { status: 500 }
-        );
-    }
-}
-
-export async function POST(req: NextRequest) {
+export const POST = checkAuth(async (req: NextRequest) => {
     try {
         const data = await req.json();
         const newUser = await UserService.createUser(data);
@@ -36,9 +19,27 @@ export async function POST(req: NextRequest) {
             { status: 500 }
         );
     }
-}
+});
 
-export async function DELETE() {
+export const GET = checkAuth(async () => {
+    try {
+        const users = await UserService.getAllUsers();
+        return NextResponse.json(
+            { message: "Successfully fetched all users", data: users },
+            {
+                status: 200,
+            }
+        );
+    } catch (error) {
+        console.error("Error fetching all users:", error);
+        return NextResponse.json(
+            { error: "Failed to fetch all users" },
+            { status: 500 }
+        );
+    }
+});
+
+export const DELETE = checkAuth(async () => {
     try {
         const users = await UserService.deleteAllUsers();
         return NextResponse.json(`Deleted ${users.count} users.`, {
@@ -51,4 +52,4 @@ export async function DELETE() {
             { status: 500 }
         );
     }
-}
+})
