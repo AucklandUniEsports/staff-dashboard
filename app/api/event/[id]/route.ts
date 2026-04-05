@@ -2,8 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { EventService } from "@/services/EventService";
 import { checkAuth } from "@/utils/checkAuth";
 
-export const GET = checkAuth(async ({ params }: { params: Promise<{ id: number }> }) => {
-    const { id } = await params;
+export const GET = checkAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const id = Number(params.id);
+    if (isNaN(id)) {
+      return NextResponse.json(
+        { message: "Invalid id" },
+        { status: 400 }
+      );
+    }
     try {
         const event = await EventService.getEventById(id);
 
@@ -23,8 +29,14 @@ export const GET = checkAuth(async ({ params }: { params: Promise<{ id: number }
     }
 });
 
-export const PUT = checkAuth(async (req: NextRequest, { params }: { params: Promise<{ id: number }> }) => {
-    const { id } = await params;
+export const PUT = checkAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const id = Number(params.id);
+    if (isNaN(id)) {
+      return NextResponse.json(
+        { message: "Invalid id" },
+        { status: 400 }
+      );
+    }
     const data = await req.json();
     try {
         const updatedEvent = await EventService.updateEvent(id, data);
@@ -41,8 +53,14 @@ export const PUT = checkAuth(async (req: NextRequest, { params }: { params: Prom
     }
 });
 
-export const DELETE = checkAuth(async ({ params }: { params: Promise<{ id: number }> }) => {
-    const { id } = await params;
+export const DELETE = checkAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const id = Number(params.id);
+    if (isNaN(id)) {
+      return NextResponse.json(
+        { message: "Invalid id" },
+        { status: 400 }
+      );
+    }
     try {
         await EventService.deleteEvent(id);
         return NextResponse.json(

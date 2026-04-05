@@ -5,17 +5,17 @@ import { checkAuth } from "@/utils/checkAuth";
 export const POST = checkAuth(async (req: NextRequest) => {
     try {
         const data = await req.json();
-        const newUser = await LocationService.createLocation(data);
+        const newLocation = await LocationService.createLocation(data);
         return NextResponse.json(
-            { message: "Successfully created user", data: newUser },
+            { message: "Successfully created location", data: newLocation },
             {
                 status: 201,
             }
         );
     } catch (error) {
-        console.error("Error creating user:", error);
+        console.error("Error creating location:", error);
         return NextResponse.json(
-            { error: "Failed to create user" },
+            { error: "Failed to create location" },
             { status: 500 }
         );
     }
@@ -38,3 +38,18 @@ export const GET = checkAuth(async () => {
         );
     }
 });
+
+export const DELETE = checkAuth(async () => {
+    try {
+        const locations = await LocationService.deleteAllLocations();
+        return NextResponse.json(`Deleted ${locations.count} locations.`, {
+            status: 200,
+        });
+    } catch (error) {
+        console.error("Error deleting all locations:", error);
+        return NextResponse.json(
+            { error: "Failed to delete all locations" },
+            { status: 500 }
+        );
+    }
+})

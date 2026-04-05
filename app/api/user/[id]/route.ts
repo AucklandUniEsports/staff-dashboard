@@ -2,11 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { UserService } from "../../../../services/UserService";
 import { checkAuth } from "@/utils/checkAuth";
 
-export const GET = checkAuth(async ({ params }: { params: Promise<{ id: string }> }) => {
-    const { id } = await params;
+export const GET = checkAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const id  = params.id;
     try {
         const user = await UserService.getUserById(id);
-
         if (!user) {
             return NextResponse.json(
                 { message: "User not found" },
@@ -23,8 +22,8 @@ export const GET = checkAuth(async ({ params }: { params: Promise<{ id: string }
     }
 });
 
-export const PUT = checkAuth(async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
-    const { id } = await params;
+export const PUT = checkAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const id  = params.id;
     const data = await req.json();
     try {
         const updatedUser = await UserService.updateUser(id, data);
@@ -41,8 +40,8 @@ export const PUT = checkAuth(async (req: NextRequest, { params }: { params: Prom
     }
 });
 
-export const DELETE = checkAuth(async ({ params }: { params: Promise<{ id: string }> }) => {
-    const { id } = await params;
+export const DELETE = checkAuth(async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const id = params.id;
     try {
         await UserService.deleteUser(id);
         return NextResponse.json(
