@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
@@ -8,18 +8,21 @@ import { Location, Category, Prisma } from "@/app/generated/prisma/client";
 import { usePathname } from "next/navigation";
 import CreateEventClient from "../create-event/CreateEventClient";
 
-
 type EventWithCategories = Prisma.EventGetPayload<{
-    include: { categories: true }
+    include: { categories: true };
 }>;
 
 interface EventPageClientProps {
-  event: EventWithCategories;
-  locations: Location[];
-  categories: Category[];
+    event: EventWithCategories;
+    locations: Location[];
+    categories: Category[];
 }
 
-export default function EventPageClient({ event, locations, categories }: EventPageClientProps) {
+export default function EventPageClient({
+    event,
+    locations,
+    categories,
+}: EventPageClientProps) {
     const router = useRouter();
     const pathname = usePathname();
     const [isEditing, setIsEditing] = useState(false);
@@ -32,7 +35,7 @@ export default function EventPageClient({ event, locations, categories }: EventP
             <img
                 className="thumbnail"
                 src={
-                    "https://hizvklozfaxggijszcab.supabase.co/storage/v1/object/public/event_thumbnails/" +
+                    process.env.NEXT_PUBLIC_SUPABASE_OBJECT_STORAGE_URL +
                     event.thumbnailPath
                 }
                 alt=""
@@ -51,19 +54,22 @@ export default function EventPageClient({ event, locations, categories }: EventP
             {isEditing && (
                 <div className="popup">
                     <div className="popup-content">
-                        <div className="popup-header">             
-                                   
-                        <div className="page-heading-title">Edit Event</div>
-                        
+                        <div className="popup-header">
+                            <div className="page-heading-title">Edit Event</div>
+
                             <StandardButton
-                            title="X"
-                            type="button"
-                            color="lime"
-                            onClick={() => setIsEditing(false)}
-                        />
+                                title="X"
+                                type="button"
+                                color="lime"
+                                onClick={() => setIsEditing(false)}
+                            />
                         </div>
 
-                        <CreateEventClient locations={locations} categories={categories} event={event} />
+                        <CreateEventClient
+                            locations={locations}
+                            categories={categories}
+                            event={event}
+                        />
                     </div>
                 </div>
             )}

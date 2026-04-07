@@ -2,10 +2,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 const apiKey = process.env.SUPABASE_SECRET_API_KEY ?? "";
-const supabase = createClient(
-    "https://hizvklozfaxggijszcab.supabase.co",
-    apiKey,
-);
+const supabase = createClient(process.env.SUPABASE_URL ?? "", apiKey);
 
 async function uploadThumbnail(thumbnail: File) {
     const ext = thumbnail.name.split(".").pop();
