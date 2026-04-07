@@ -1,7 +1,7 @@
 ---
 name: Issue Template
 about: Describe a feature or functionality from the user's perspective
-title: "[ISSUE-TYPE] Short, descriptive title"
+title: ""
 labels: ""
 assignees: ""
 ---
@@ -21,8 +21,6 @@ assignees: ""
 <!-- Checklist of requirements that must be fulfilled before the issue can be considered complete -->
 
 - [ ] Acceptance criteria met
-- [ ] Agreed tests written
-- [ ] Agreed documentation in GitHub wiki
 - [ ] PR reviewed
 
 ---
