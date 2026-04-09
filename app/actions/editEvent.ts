@@ -1,7 +1,7 @@
 "use server";
-import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { readFormData } from "./readFormData";
+import { EventService } from "@/services/EventService";
 
 export default async function editEvent(eventId: number, formData: FormData) {
         const {
@@ -15,14 +15,11 @@ export default async function editEvent(eventId: number, formData: FormData) {
         } = await readFormData(formData);
 
     
-    await prisma.event.update({
-        where: {
-            id: eventId,
-        },
-        data: {
+    await EventService.updateEvent(eventId, {
+
             name: name || undefined,
             date: date || undefined,
-            locationId: locationId || undefined,
+            location: { connect: { id: locationId } },
             description: description || undefined,
             link: link || undefined,
             thumbnailPath: thumbnailPath || undefined,
@@ -31,7 +28,7 @@ export default async function editEvent(eventId: number, formData: FormData) {
                 create: categories.map((categoryId) => ({
                     categoryId,
                 })),
-            },
+            
         },
     });
     redirect(`/events/${eventId}`);

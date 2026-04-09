@@ -1,7 +1,7 @@
 "use server";
-import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { readFormData } from "./readFormData";
+import { EventService } from "@/services/EventService";
 
 export default async function createEvent(formData: FormData) {
     const {
@@ -17,11 +17,10 @@ export default async function createEvent(formData: FormData) {
     if (!date) throw new Error("Date is required");
     if (!thumbnailPath) throw new Error("Thumbnail is required");
 
-    await prisma.event.create({
-        data: {
+    await EventService.createEvent({
             name: name,
             date: date,
-            locationId: locationId,
+            location: { connect: { id: locationId } },
             description: description,
             link: link,
             thumbnailPath: thumbnailPath,
@@ -30,7 +29,7 @@ export default async function createEvent(formData: FormData) {
                     categoryId
                 }))
             }
-        }
+        
     })
     redirect('/events');
 }
