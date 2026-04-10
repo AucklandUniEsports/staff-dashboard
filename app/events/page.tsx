@@ -1,10 +1,20 @@
 import Link from "next/link";
 import Table from "../components/Table";
-import prisma from '@/lib/prisma';
+import { cookies } from "next/headers";
+
+const cookieStore = await cookies();
 
 const columns = ['name'];
 export default async function Events() {
-  const rows = await prisma.event.findMany();
+  const res = await fetch(`${process.env.BETTER_AUTH_URL}/api/event`, {
+      cache: "no-store",
+      headers: {
+          Cookie: cookieStore.toString(),
+      },
+  });
+  
+  const { data: rows} = await res.json();
+
   return (
       <>
         <Link className="action-block" href={"events/create-event"}>+ Create an Event.</Link>
