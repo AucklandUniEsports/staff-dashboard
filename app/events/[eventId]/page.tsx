@@ -1,5 +1,6 @@
-import prisma from "@/lib/prisma";
 import EventPageClient from "./EventPageClient";
+import { cookies } from "next/headers";
+
 
 export default async function UserPage({
     params,
@@ -7,15 +8,26 @@ export default async function UserPage({
     params: Promise<{ eventId: string }>;
 }) {
     const { eventId } = await params;
+    const cookieStore = await cookies();
 
-    const [data, locations, categories] = await Promise.all([
-        prisma.event.findUnique({
-            where: { id: Number(eventId) },
-            include: { categories: true },
+    const [eventRes, locationsRes, categoriesRes] = await Promise.all([
+        fetch(`${process.env.BETTER_AUTH_URL}/api/event/${eventId}`, {
+            cache: "no-store",
+            headers: { Cookie: cookieStore.toString() },
         }),
-        prisma.location.findMany(),
-        prisma.category.findMany(),
+        fetch(`${process.env.BETTER_AUTH_URL}/api/location`, {
+            cache: "no-store",
+            headers: { Cookie: cookieStore.toString() },
+        }),
+        fetch(`${process.env.BETTER_AUTH_URL}/api/category`, {
+            cache: "no-store",
+            headers: { Cookie: cookieStore.toString() },
+        }),
     ]);
+    const eventJson = await eventRes.json();
+    const data = eventJson?.data ?? eventJson;
+    const { data: locations } = await locationsRes.json();
+    const { data: categories } = await categoriesRes.json();
 
     if (!data) {
         return <div>not found!</div>;
