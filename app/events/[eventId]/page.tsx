@@ -24,8 +24,7 @@ export default async function UserPage({
             headers: { Cookie: cookieStore.toString() },
         }),
     ]);
-    const eventJson = await eventRes.json();
-    const data = eventJson?.data ?? eventJson;
+    const { data } = await eventRes.json();
     const { data: locations } = await locationsRes.json();
     const { data: categories } = await categoriesRes.json();
 

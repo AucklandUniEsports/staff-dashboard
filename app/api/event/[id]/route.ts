@@ -19,7 +19,7 @@ export const GET = checkAuth(async (req: NextRequest, { params }: { params: { id
                 { status: 404 }
             );
         }
-        return NextResponse.json(event);
+        return NextResponse.json({ message: "Event retrieved successfully", data: event });
     } catch (err) {
         console.error(err);
         return NextResponse.json(
