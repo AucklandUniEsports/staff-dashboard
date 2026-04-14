@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 const columns = ['name'];
 export default async function Events() {
     const cookieStore = await cookies();
-    const res = await fetch(`${process.env.BETTER_AUTH_URL}/api/event`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/event`, {
         cache: "no-store",
         headers: {
             Cookie: cookieStore.toString(),

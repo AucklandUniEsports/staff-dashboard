@@ -11,15 +11,15 @@ export default async function UserPage({
     const cookieStore = await cookies();
 
     const [eventRes, locationsRes, categoriesRes] = await Promise.all([
-        fetch(`${process.env.BETTER_AUTH_URL}/api/event/${eventId}`, {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/api/event/${eventId}`, {
             cache: "no-store",
             headers: { Cookie: cookieStore.toString() },
         }),
-        fetch(`${process.env.BETTER_AUTH_URL}/api/location`, {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/api/location`, {
             cache: "no-store",
             headers: { Cookie: cookieStore.toString() },
         }),
-        fetch(`${process.env.BETTER_AUTH_URL}/api/category`, {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/api/category`, {
             cache: "no-store",
             headers: { Cookie: cookieStore.toString() },
         }),
