@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
+  id            String    @id
   createdAt     DateTime  @default(now())
   email         String    @unique
   name          String
@@ -86,14 +86,14 @@ model SponsorTier {
 }
 
 model Session {
-  id            Int      @id @default(autoincrement())
+  id            String   @id
   expiresAt     DateTime
   token         String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   ipAddress     String?
   userAgent     String?
-  userId        Int
+  userId        String
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   impersonateBy String?
 
@@ -105,10 +105,10 @@ model Session {
 }
 
 model Account {
-  id                    Int       @id @default(autoincrement())
+  id                    String    @id
   accountId             String
   providerId            String
-  userId                Int
+  userId                String
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
@@ -125,7 +125,7 @@ model Account {
 }
 
 model Verification {
-  id         Int      @id @default(autoincrement())
+  id         String   @id
   identifier String
   value      String
   expiresAt  DateTime
