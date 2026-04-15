@@ -75,7 +75,7 @@ model Sponsor {
   name          String      @unique
   sponsorTier   SponsorTier @relation(fields: [sponsorTierId], references: [id])
   sponsorTierId Int
-  image         String?
+  image_url         String?
 }
 
 model SponsorTier {
