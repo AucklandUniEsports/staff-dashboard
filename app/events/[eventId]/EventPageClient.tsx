@@ -28,7 +28,6 @@ export default function EventPageClient({
     const [isEditing, setIsEditing] = useState(false);
 
     if (!event) return <p>Event not found!</p>;
-
     return (
         <section className="content-block">
             <BackNav />

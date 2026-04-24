@@ -2,8 +2,11 @@
 import { redirect } from "next/navigation";
 import { readFormData } from "./readFormData";
 import { EventService } from "@/services/EventService";
+import { success } from "better-auth";
+import { error } from "console";
 
-export default async function createEvent(formData: FormData) {
+type ActionState = { error: boolean; message: string } | null;
+export default async function createEvent(prevState: ActionState | null, formData: FormData) {
     const {
         name,
         date,
@@ -16,8 +19,8 @@ export default async function createEvent(formData: FormData) {
 
     if (!date) throw new Error("Date is required");
     if (!thumbnailPath) throw new Error("Thumbnail is required");
-
-    await EventService.createEvent({
+    try {
+        await EventService.createEvent({
             name: name,
             date: date,
             location: { connect: { id: locationId } },
@@ -25,11 +28,14 @@ export default async function createEvent(formData: FormData) {
             link: link,
             thumbnailPath: thumbnailPath,
             categories: {
-                create: categories.map(categoryId => ({
-                    categoryId
-                }))
-            }
-        
-    })
+                create: categories.map((categoryId) => ({
+                    categoryId,
+                })),
+            },
+        });
+    } catch {
+        return { error: true, message: "Failed to create event. Please try again." };
+    }
+
     redirect('/events');
 }

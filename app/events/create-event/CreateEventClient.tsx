@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import BackNav from "@/app/components/BackNav";
 import StandardButton from "@/app/components/StandardButton";
 import CategoryTag from "@/app/components/CategoryTag";
 import createEvent from "@/app/actions/createEvent";
 import { Location, Category, Prisma } from "@/app/generated/prisma/client";
 import editEvent from "@/app/actions/editEvent";
+import { toast, ToastContainer } from "react-toastify/unstyled";
+import "react-toastify/dist/ReactToastify.css";
 
 type EventWithCategories = Prisma.EventGetPayload<{
     include: { categories: true };
@@ -31,10 +33,18 @@ export default function CreateEventClient({
     const editOrCreateEvent = event
         ? editEvent.bind(null, event.id)
         : createEvent;
+
+    const [state, formAction] = useActionState(
+        editOrCreateEvent,
+        null,
+    );
+    useEffect(() => {if (state?.error) toast.error(state.message);}, [state]);
     return (
         <section className="content-block">
             {!event && <BackNav />}
-            <form action={editOrCreateEvent}>
+            <ToastContainer style={{top: "112px"}}/>
+
+            <form action={formAction}>
                 <input
                     accept="image/*"
                     hidden
