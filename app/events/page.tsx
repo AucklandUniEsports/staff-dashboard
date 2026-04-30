@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Table from "../components/Table";
 import { cookies } from "next/headers";
-
+import SuccessToast from "../components/SuccessToast";
 
 const columns = ['name'];
 export default async function Events() {
@@ -17,6 +17,7 @@ export default async function Events() {
 
     return (
         <>
+            <SuccessToast />
             <Link className="action-block" href={"events/create-event"}>
                 + Create an Event.
             </Link>

@@ -17,8 +17,8 @@ export default async function createEvent(prevState: ActionState | null, formDat
         thumbnailPath,
     } = await readFormData(formData);
 
-    if (!date) throw new Error("Date is required");
-    if (!thumbnailPath) throw new Error("Thumbnail is required");
+    if (!date) return { error: true, message: "Date is required" };
+    if (!thumbnailPath) return { error: true, message: "Thumbnail is required" };
     try {
         await EventService.createEvent({
             name: name,
@@ -37,5 +37,5 @@ export default async function createEvent(prevState: ActionState | null, formDat
         return { error: true, message: "Failed to create event. Please try again." };
     }
 
-    redirect('/events');
+    redirect('/events?success=Event created successfully!');
 }

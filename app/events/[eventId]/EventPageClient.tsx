@@ -7,6 +7,7 @@ import BackNav from "@/app/components/BackNav";
 import { Location, Category, Prisma } from "@/app/generated/prisma/client";
 import { usePathname } from "next/navigation";
 import CreateEventClient from "../create-event/CreateEventClient";
+import SuccessToast from "@/app/components/SuccessToast";
 
 type EventWithCategories = Prisma.EventGetPayload<{
     include: { categories: true };
@@ -31,6 +32,7 @@ export default function EventPageClient({
     return (
         <section className="content-block">
             <BackNav />
+            <SuccessToast />
             <img
                 className="thumbnail"
                 src={

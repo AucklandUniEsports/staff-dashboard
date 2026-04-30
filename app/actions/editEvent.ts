@@ -36,5 +36,5 @@ export default async function editEvent(eventId: number, prevState: ActionState 
         return { error: true, message: "Failed to edit event. Please try again." };
     }
 
-    redirect(`/events/${eventId}`);
+    redirect(`/events/${eventId}?success=Event updated successfully!`);
 }
