@@ -12,7 +12,7 @@ export class EventService {
     }
 
     static async getEventById(id: number): Promise<EventDTO | null> {
-        const event = await prisma.event.findUnique({ where: { id } });
+        const event = await prisma.event.findUnique({ where: { id } , include: { categories: true }});
         if (!event) {
             return null;
         }
