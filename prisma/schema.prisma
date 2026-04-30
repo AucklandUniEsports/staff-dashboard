@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-ts"
   output   = "../app/generated/prisma"
@@ -18,15 +12,15 @@ model User {
   createdAt     DateTime  @default(now())
   email         String    @unique
   name          String
-  role          String?   @default("user")
   emailVerified Boolean   @default(false)
   image         String?
   updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  banned        Boolean?
-  banReason     String?
   banExpires    DateTime?
+  banReason     String?
+  banned        Boolean?
+  role          String?   @default("user")
+  accounts      Account[]
+  sessions      Session[]
 
   @@map("user")
 }
@@ -35,13 +29,13 @@ model Event {
   id            Int                  @id @default(autoincrement())
   createdAt     DateTime             @default(now())
   name          String               @unique
-  categories    CategoriesOnEvents[]
   date          DateTime
-  location      Location             @relation(fields: [locationId], references: [id])
-  locationId    Int
   description   String
   link          String
+  locationId    Int
   thumbnailPath String
+  categories    CategoriesOnEvents[]
+  location      Location             @relation(fields: [locationId], references: [id])
 }
 
 model Location {
@@ -60,11 +54,11 @@ model Category {
 }
 
 model CategoriesOnEvents {
-  event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId    Int
-  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId Int
   assignedAt DateTime @default(now())
+  category   Category @relation(fields: [categoryId], references: [id])
+  event      Event    @relation(fields: [eventId], references: [id])
 
   @@id([eventId, categoryId])
 }
@@ -73,9 +67,10 @@ model Sponsor {
   id            Int         @id @default(autoincrement())
   createdAt     DateTime    @default(now())
   name          String      @unique
-  sponsorTier   SponsorTier @relation(fields: [sponsorTierId], references: [id])
   sponsorTierId Int
-  image_url         String?
+  image_url     String
+  link          String
+  sponsorTier   SponsorTier @relation(fields: [sponsorTierId], references: [id])
 }
 
 model SponsorTier {
@@ -86,20 +81,18 @@ model SponsorTier {
 }
 
 model Session {
-  id            String   @id
-  expiresAt     DateTime
-  token         String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  ipAddress     String?
-  userAgent     String?
-  userId        String
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  impersonateBy String?
-
+  id             String   @id
+  expiresAt      DateTime
+  token          String   @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  ipAddress      String?
+  userAgent      String?
+  userId         String
+  impersonateBy  String?
   impersonatedBy String?
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
   @@index([userId])
   @@map("session")
 }
@@ -109,7 +102,6 @@ model Account {
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -119,6 +111,7 @@ model Account {
   password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("account")
