@@ -1,3 +1,4 @@
+import { CategoriesOnEvents } from "@/app/generated/prisma/client";
 import { EventModel } from "@/app/generated/prisma/models";
 
 export interface EventDTO {
@@ -8,6 +9,7 @@ export interface EventDTO {
     description: string;
     link: string;
     thumbnailPath: string;
+    categories?: CategoriesOnEvents[];
 }
 
 export function toEventDTO(
@@ -21,5 +23,6 @@ export function toEventDTO(
         description: event.description,
         link: event.link,
         thumbnailPath: event.thumbnailPath,
+        categories: 'categories' in event ? event.categories as CategoriesOnEvents[]: undefined,
     };
 }
