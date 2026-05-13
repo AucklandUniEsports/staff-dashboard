@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Table from "../components/Table";
 import { cookies } from "next/headers";
 import SuccessToast from "../components/SuccessToast";
+import DeleteEventsClient from "./delete-event/DeleteEventClient";
 
-const columns = ['name'];
+const columns = ["name"];
 export default async function Events() {
     const cookieStore = await cookies();
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/event`, {
@@ -25,12 +25,7 @@ export default async function Events() {
                 + Add Event Category.
             </Link>
             <section className="content-block">
-                <input
-                    className="input-field"
-                    type="text"
-                    placeholder="Search for an event..."
-                />
-                <Table columns={columns} rows={rows} />
+                <DeleteEventsClient rows={rows} columns={columns} />
             </section>
         </>
     );
