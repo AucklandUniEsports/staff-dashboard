@@ -1,19 +1,23 @@
 import Link from "next/link";
 import Table from "../components/Table";
-import prisma from '@/lib/prisma';
+import { cookies } from "next/headers";
 import SuccessToast from "../components/SuccessToast";
 
 const columns = ['name', 'tier'];
 export default async function Sponsors() {
-  const rows = await prisma.sponsor.findMany();
+  const cookieStore = await cookies();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/sponsor`, {
+      cache: "no-store",
+      headers: {
+          Cookie: cookieStore.toString(),
+      },
+  });
+    const { data: rows } = await res.json();
   return (
       <>
           <SuccessToast />
           <Link className="action-block" href={"sponsors/add-sponsor"}>
               + Add a Sponsor.
-          </Link>
-          <Link className="action-block" href={"sponsors/add-sponsor-tier"}>
-              + Add Sponsor Tier.
           </Link>
           <section className="content-block">
               <input

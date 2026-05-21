@@ -18,15 +18,21 @@ export class SponsorService {
     }
 
     static async getAllSponsors() {
-        return prisma.sponsor.findMany();
+        const sponsors = await prisma.sponsor.findMany({
+            include: { sponsorTier: true },
+        });
+        return sponsors.map(({ sponsorTier, ...s }) => ({
+            ...s,
+            tier: sponsorTier.name,
+        }));
     }
 
     static async getSponsorById(id: number) {
-        const sponsor = await prisma.sponsor.findUnique({ where: { id } });
+        const sponsor = await prisma.sponsor.findUnique({ where: { id }, include: { sponsorTier: true } });
         if (!sponsor) {
             return null;
         }
-        return sponsor;
+        return { ...sponsor, tier: sponsor.sponsorTier.name };
     }
 
     static async updateSponsor(id: number, data: SponsorUpdateInput) {
