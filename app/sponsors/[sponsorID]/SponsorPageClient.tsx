@@ -18,14 +18,13 @@ export default function SponsorPageClient({ sponsor }: SponsorPageClientProps) {
           <section className="content-block">
               <BackNav />
               <SuccessToast />
-               {sponsor.image_url && (
+               {sponsor.thumbnailPath && (
                     <img
                         className="thumbnail"
-                        src={sponsor.image_url}
+                        src={sponsor.thumbnailPath}
                         alt="sponsor image"
                     />
                 )}
-                alt="sponsor image"
                <p className="user-name">{sponsor.name}</p>
                <div className="user-info">
                     <p>Tier: {sponsor.tier}</p>

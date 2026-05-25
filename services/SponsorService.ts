@@ -11,7 +11,7 @@ export class SponsorService {
             data: {
                 name: data.name,
                 sponsorTier: { connect: { id: data.sponsorTierId } },
-                image_url: data.image_url,
+                thumbnailPath: data.thumbnailPath,
                 link: data.link,
             },
         });
