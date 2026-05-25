@@ -7,18 +7,18 @@ export interface SponsorDTO {
     thumbnailPath: string;
     link: string;
     sponsorTierId: number;
-    tier: string;
+    sponsorTier: string;
 }
 
 export function toSponsorDTO(
-    sponsor: SponsorModel & { tier: SponsorTier }
+    sponsor: SponsorModel & { sponsorTier: SponsorTier }
 ): SponsorDTO {
      return {
           id: sponsor.id,
           name: sponsor.name,
           thumbnailPath: sponsor.thumbnailPath,
           link: sponsor.link,
-          tier: sponsor.tier.name,
+          sponsorTier: sponsor.sponsorTier.name,
           sponsorTierId: sponsor.sponsorTierId,
      };
 }
