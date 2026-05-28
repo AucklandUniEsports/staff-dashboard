@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Table from "@/app/components/Table";
+import { toast, ToastContainer } from "react-toastify/unstyled";
 
 interface Props {
     rows: any[];
@@ -25,7 +26,7 @@ export default function DeleteEventsClient({ rows, columns }: Props) {
             setEvents((prev) => prev.filter((e) => e.id !== id));
         } catch (err) {
             console.error(err);
-            alert(
+            toast.error(
                 err instanceof Error ? err.message : "Failed to delete event",
             );
         }
@@ -38,6 +39,7 @@ export default function DeleteEventsClient({ rows, columns }: Props) {
                 placeholder="Search for an event..."
             />
             <Table columns={columns} rows={events} onDelete={handleDelete} />
+            <ToastContainer />
         </>
     );
 }
