@@ -2,7 +2,7 @@ import { uploadThumbnail } from "./uploadThumbnail";
 
 export async function readSponsorFormData(formData: FormData) {
     const name = formData.get("name") as string;
-    const sponsorTierId = Number(formData.get("tier"));
+    const sponsorTierId = Number(formData.get("sponsorTier"));
     const link = formData.get("link") as string;
     const thumbnail = formData.get("thumbnail");
 

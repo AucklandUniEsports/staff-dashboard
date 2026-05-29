@@ -21,7 +21,7 @@ export default function SponsorPageClient({ sponsor }: SponsorPageClientProps) {
                {sponsor.thumbnailPath && (
                     <img
                         className="thumbnail"
-                        src={sponsor.thumbnailPath}
+                        src={`${process.env.NEXT_PUBLIC_SUPABASE_OBJECT_STORAGE_URL}${sponsor.thumbnailPath}`}
                         alt="sponsor image"
                     />
                 )}

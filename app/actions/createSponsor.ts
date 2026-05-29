@@ -1,3 +1,4 @@
+"use server";
 import { redirect } from "next/navigation";
 import { SponsorService } from "@/services/SponsorService";
 import { readSponsorFormData } from "./readSponsorFormData";
@@ -18,5 +19,6 @@ export default async function createSponsor(prevState: ActionState | null, formD
      } catch (error) {
             return { error: true, message: "Failed to create sponsor" };
      }
+     redirect('/sponsors?success=Sponsor created successfully!');
 
 }
