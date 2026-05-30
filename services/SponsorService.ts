@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { SponsorDTO, toSponsorDTO } from "@/dtos/sponsor.dto";
 import {
     SponsorUncheckedCreateInput,
-    SponsorUpdateInput,
+    SponsorUncheckedUpdateInput,
 } from "@/app/generated/prisma/models";
 import { createClient } from "@supabase/supabase-js";
 
@@ -35,7 +35,7 @@ export class SponsorService {
         return toSponsorDTO(sponsor);
     }
 
-    static async updateSponsor(id: number, data: SponsorUpdateInput) : Promise<SponsorDTO> {
+    static async updateSponsor(id: number, data: SponsorUncheckedUpdateInput) : Promise<SponsorDTO> {
         const sponsor = await prisma.sponsor.update({
             where: { id },
             data,

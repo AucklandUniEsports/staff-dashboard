@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import SponsorPageClient from "./SponsorPageClient";
 import { cookies } from "next/headers";
 
@@ -13,8 +14,9 @@ export default async function SponsorPage({
         headers: { Cookie: cookieStore.toString() },
     });
     const sponsor = await sponsorRes.json();
+    const sponsorTiers = await prisma.sponsorTier.findMany();
     if (!sponsor) {
         return <div>not found!</div>;
     }
-    return <SponsorPageClient sponsor={sponsor} />;
+    return <SponsorPageClient sponsor={sponsor} sponsorTiers={sponsorTiers} />;
 }

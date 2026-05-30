@@ -8,6 +8,7 @@ import createSponsor from "@/app/actions/createSponsor";
 import { Sponsor, SponsorTier, Prisma } from "@/app/generated/prisma/client";
 import { toast, ToastContainer } from "react-toastify/unstyled";
 import "react-toastify/dist/ReactToastify.css";
+import editSponsor from "@/app/actions/editSponsor";
 
 interface CreateSponsorClientProps {
     sponsor?: Sponsor;
@@ -23,7 +24,8 @@ export default function CreateSponsorClient({
             ? `${process.env.NEXT_PUBLIC_SUPABASE_OBJECT_STORAGE_URL}${sponsor.thumbnailPath}`
             : null,
     );
-    const [state, formAction] = useActionState(createSponsor, null);
+    const editOrCreateSponsor = sponsor ? editSponsor.bind(null, sponsor.id) : createSponsor;
+    const [state, formAction] = useActionState(editOrCreateSponsor, null);
     useEffect(() => {
         if (state?.error) toast.error(state.message);
     }, [state]);

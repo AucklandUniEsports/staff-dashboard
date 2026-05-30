@@ -3,7 +3,7 @@ import Table from "../components/Table";
 import { cookies } from "next/headers";
 import SuccessToast from "../components/SuccessToast";
 
-const columns = ['name', 'tier'];
+const columns = ['name', 'sponsorTier'];
 export default async function Sponsors() {
   const cookieStore = await cookies();
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/sponsor`, {
