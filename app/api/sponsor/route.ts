@@ -41,7 +41,7 @@ export const GET = checkAuth(async () => {
 
 export const DELETE = checkAuth(async () => {
     try {
-        const sponsors = await SponsorService.deleteAllCategories();
+        const sponsors = await SponsorService.deleteAllSponsors();
         return NextResponse.json(`Deleted ${sponsors.count} sponsors.`, {
             status: 200,
         });
