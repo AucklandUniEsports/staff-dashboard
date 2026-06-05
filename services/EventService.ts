@@ -1,9 +1,15 @@
 import prisma from "../lib/prisma";
 import { EventDTO, toEventDTO } from "@/dtos/event.dto";
-import { EventCreateInput, EventUpdateInput } from "@/app/generated/prisma/models";
+import {
+    EventCreateInput,
+    EventUpdateInput,
+} from "@/app/generated/prisma/models";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+);
 
 export class EventService {
     static async getAllEvents(): Promise<EventDTO[]> {
@@ -12,7 +18,10 @@ export class EventService {
     }
 
     static async getEventById(id: number): Promise<EventDTO | null> {
-        const event = await prisma.event.findUnique({ where: { id } , include: { categories: true }});
+        const event = await prisma.event.findUnique({
+            where: { id },
+            include: { categories: true },
+        });
         if (!event) {
             return null;
         }
@@ -29,7 +38,7 @@ export class EventService {
 
     static async updateEvent(
         id: number,
-        data: EventUpdateInput
+        data: EventUpdateInput,
     ): Promise<EventDTO> {
         const event = await prisma.event.update({
             where: { id },
@@ -46,13 +55,17 @@ export class EventService {
 
         if (event?.thumbnailPath) {
             const { error } = await supabase.storage
-            .from("event_thumbnails")
-            .remove([event.thumbnailPath]);
+                .from("event_thumbnails")
+                .remove([event.thumbnailPath]);
 
             if (error) {
-            console.error("Failed to delete image:", error);
+                console.error("Failed to delete image:", error);
             }
         }
+
+        await prisma.categoriesOnEvents.deleteMany({
+            where: { eventId: id },
+        });
 
         const result = await prisma.event.delete({
             where: { id },
@@ -65,22 +78,20 @@ export class EventService {
         const events = await prisma.event.findMany({
             select: { thumbnailPath: true },
         });
-        const paths = events
-            .map(e => e.thumbnailPath)
-            .filter(Boolean);
+        const paths = events.map((e) => e.thumbnailPath).filter(Boolean);
 
         if (paths.length > 0) {
             const { error } = await supabase.storage
-            .from("event_thumbnails")
-            .remove(paths);
+                .from("event_thumbnails")
+                .remove(paths);
 
             if (error) {
-            console.error("Failed to delete some images:", error);
+                console.error("Failed to delete some images:", error);
             }
         }
 
         const result = await prisma.event.deleteMany();
 
         return result;
-        }
+    }
 }
