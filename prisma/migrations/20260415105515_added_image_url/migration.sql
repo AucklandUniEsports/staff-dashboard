@@ -1,2 +1,2 @@
--- AlterTable
-ALTER TABLE "Sponsor" ADD COLUMN     "image_url" TEXT;
+  ALTER TABLE "Sponsor" ADD COLUMN "thumbnailPath" TEXT NOT NULL DEFAULT '';
+  ALTER TABLE "Sponsor" ADD COLUMN "link" TEXT NOT NULL DEFAULT '';

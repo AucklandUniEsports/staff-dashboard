@@ -1,48 +1,83 @@
 import prisma from "@/lib/prisma";
+import { SponsorDTO, toSponsorDTO } from "@/dtos/sponsor.dto";
 import {
     SponsorUncheckedCreateInput,
-    SponsorUpdateInput,
+    SponsorUncheckedUpdateInput,
 } from "@/app/generated/prisma/models";
-import { string } from "better-auth";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+);
+
 
 export class SponsorService {
-    static async addSponsor(data: SponsorUncheckedCreateInput) {
-        return prisma.sponsor.create({
-            data: {
-                name: data.name,
-                sponsorTier: { connect: { id: data.sponsorTierId } },
-                image_url: data.image_url,
-                link: data.link,
-            },
+    static async addSponsor(data: SponsorUncheckedCreateInput): Promise<SponsorDTO> {
+        const sponsor = await prisma.sponsor.create({
+            data, include: { sponsorTier: true },
         });
+        return toSponsorDTO(sponsor);
     }
 
-    static async getAllSponsors() {
-        return prisma.sponsor.findMany();
+    static async getAllSponsors() : Promise<SponsorDTO[]> {
+        const sponsors = await prisma.sponsor.findMany({
+            include: { sponsorTier: true },
+        });
+        return sponsors.map(toSponsorDTO);
     }
 
-    static async getSponsorById(id: number) {
-        const sponsor = await prisma.sponsor.findUnique({ where: { id } });
+    static async getSponsorById(id: number): Promise<SponsorDTO | null> {
+        const sponsor = await prisma.sponsor.findUnique({ where: { id }, include: { sponsorTier: true } });
         if (!sponsor) {
             return null;
         }
-        return sponsor;
+        return toSponsorDTO(sponsor);
     }
 
-    static async updateSponsor(id: number, data: SponsorUpdateInput) {
-        return prisma.sponsor.update({
+    static async updateSponsor(id: number, data: SponsorUncheckedUpdateInput) : Promise<SponsorDTO> {
+        const sponsor = await prisma.sponsor.update({
             where: { id },
             data,
+            include: { sponsorTier: true },
         });
+        return toSponsorDTO(sponsor);
     }
 
     static async deleteSponsor(id: number) {
-        return prisma.sponsor.delete({
+        const sponsor = await prisma.sponsor.findUnique({
             where: { id },
         });
+
+        if (sponsor?.thumbnailPath) {
+            const { error } = await supabase.storage
+            .from("sponsor_thumbnails")
+            .remove([sponsor.thumbnailPath]);
+            if (error) {
+                console.error("Failed to delete image:", error);
+            }}
+        const result = await prisma.sponsor.delete({
+            where: { id },
+        });
+        return result;
     }
 
-    static async deleteAllCategories() {
-        return prisma.sponsor.deleteMany();
+    static async deleteAllSponsors() {
+        const sponsors = await prisma.sponsor.findMany({
+            select: { thumbnailPath: true },
+        });
+        const paths = sponsors.map((sponsor) => sponsor.thumbnailPath).filter(Boolean) as string[];
+        if (paths.length > 0) {
+            const { error } = await supabase.storage
+            .from("sponsor_thumbnails")
+            .remove(paths);
+            if (error) {
+                console.error("Failed to delete images:", error);
+            }
+        }
+        const result = await prisma.sponsor.deleteMany();
+
+
+        return result;
     }
 }
