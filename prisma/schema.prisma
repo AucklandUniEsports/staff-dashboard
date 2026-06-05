@@ -68,7 +68,7 @@ model Sponsor {
   createdAt     DateTime    @default(now())
   name          String      @unique
   sponsorTierId Int
-  image_url     String
+  thumbnailPath String
   link          String
   sponsorTier   SponsorTier @relation(fields: [sponsorTierId], references: [id])
 }
