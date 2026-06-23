@@ -1,7 +1,5 @@
-import WorkInProgress from "../components/WorkInProgress";
+import MiscClient from "./MiscClient";
 
 export default function Miscellaneous() {
-  return (
-    <WorkInProgress/>
-  );
+  return <MiscClient />;
 }
