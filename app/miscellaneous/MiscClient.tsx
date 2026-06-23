@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import CategoryTag from "../components/CategoryTag";
+import StandardButton from "../components/StandardButton";
 
 type Category = {
   id: number;
@@ -29,6 +30,9 @@ export default function MiscClient() {
   return (
     <section className="content-block">
       <h2 className="input-label">Event Categories</h2>
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "12px" }}>
+        <StandardButton title="+ Add Category." color="grey" link="/miscellaneous/add-category" />
+      </div>
       {loading ? (
         <p>Loading...</p>
       ) : categories.length === 0 ? (
