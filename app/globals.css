@@ -323,6 +323,12 @@ main {
     color: white;
 }
 
+.button-small .button-standard {
+    font-size: 14px;
+    padding: 6px 10px;
+    width: 100%;
+}
+
 .delete-button {
     cursor: pointer;
     border: none;
