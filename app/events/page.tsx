@@ -21,9 +21,6 @@ export default async function Events() {
             <Link className="action-block" href={"events/create-event"}>
                 + Create an Event.
             </Link>
-            <Link className="action-block" href={"events/add-event-category"}>
-                + Add Event Category.
-            </Link>
             <section className="content-block">
                 <DeleteEventsClient rows={rows} columns={columns} />
             </section>

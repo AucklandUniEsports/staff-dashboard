@@ -27,7 +27,7 @@ export default function CategoryTag({ name, htmlFor, onDelete, onEdit }: Categor
 
   if (isEditing) {
     return (
-      <li className="category-tag" style={{ width: "100%", gap: "8px", alignItems: "center" }}>
+      <li className="category-tag" style={{ width: "100%", boxSizing: "border-box", gap: "8px", alignItems: "center", paddingRight: 12 }}>
         <input
           className="input-field"
           style={{ margin: 0, flex: 1 }}
@@ -52,7 +52,7 @@ export default function CategoryTag({ name, htmlFor, onDelete, onEdit }: Categor
   }
 
   return (
-    <li className="category-tag" style={{ width: "100%", gap: "8px", justifyContent: "space-between" }}>
+    <li className="category-tag" style={{ width: "100%", boxSizing: "border-box", gap: "8px", justifyContent: "space-between", paddingRight: 12 }}>
       <p>{name}</p>
       {(onEdit || onDelete) && (
         <div className="button-small" style={{ display: "flex", gap: "8px" }}>

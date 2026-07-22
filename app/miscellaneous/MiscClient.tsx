@@ -13,7 +13,6 @@ type Category = {
 
 export default function MiscClient() {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<number | null>(null);
 
   async function fetchCategories() {
@@ -22,7 +21,6 @@ export default function MiscClient() {
       const { data } = await res.json();
       setCategories(data);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
@@ -55,9 +53,7 @@ export default function MiscClient() {
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "12px" }}>
         <StandardButton title="+ Add Category." color="grey" link="/miscellaneous/add-category" />
       </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : categories.length === 0 ? (
+      {categories.length === 0 ? (
         <p>No categories yet.</p>
       ) : (
         <ul style={{ display: "flex", flexDirection: "column", gap: "16px" }}>

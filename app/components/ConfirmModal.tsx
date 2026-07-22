@@ -24,7 +24,7 @@ export default function ConfirmModal({ message, onConfirm, onCancel }: ConfirmMo
         onClick={(e) => e.stopPropagation()}
       >
         <p style={{ color: "white", margin: 0 }}>{message}</p>
-        <div style={{ display: "flex", gap: "8px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <StandardButton title="Delete." color="red" onClick={onConfirm} />
           <StandardButton title="Cancel." color="grey" onClick={onCancel} />
         </div>
